@@ -92,7 +92,7 @@ Contributions to Keep App are welcome! If you find bugs, have suggestions, or wa
 
 ## License
 
-Keep App is open-source software licensed under the [MIT License](https://opensource.org/licenses/MIT).
+
 
 ---
 Thank you for using Keep App! If you have any questions or need support, feel free to contact us at keepapp-support@example.com. Happy note-taking and organizing!
