@@ -35,7 +35,7 @@ This repository contains the source code for Keep App, and it's open-source, all
 
 ## Demo
 
-You can experience a live demo of Keep App at [https://example.com/keep-app-demo](https://example.com/keep-app-demo)
+You can experience a live demo of Keep App at [https://example.com/keep-app-demo](https://keeper-app-rpm8.onrender.com/)
 
 ## Installation
 
