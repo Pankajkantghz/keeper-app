@@ -1,12 +1,16 @@
 import React from "react";
 
-import HighlightIcon from "@material-ui/icons/Highlight";
-
-function Header() {
+function Header(props) {
   return (
     <header>
-      {/* <HighlightIcon /> */}
       <h1>Keeper App</h1>
+
+      <input
+        type="text"
+        placeholder="Search notes by title..."
+        value={props.searchTerm}
+        onChange={(event) => props.onSearchChange(event.target.value)}
+      />
     </header>
   );
 }

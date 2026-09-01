@@ -1,56 +1,71 @@
-// following the naming style of airbnb guide - jsx (js would suffice but jsx preferred)
-
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Note from "./Note";
-// import notes from "../notes";
 import CreateArea from "./CreateArea";
 
 function App() {
-  // react useState ...
-  const [notes, setNotes] = useState([]);
+  // Load notes from localStorage
+  const [notes, setNotes] = useState(() => {
+    const savedNotes = localStorage.getItem("keeper-notes");
 
+    return savedNotes ? JSON.parse(savedNotes) : [];
+  });
+
+  // Search text
+  const [searchTerm, setSearchTerm] = useState("");
+
+  // Save notes to localStorage whenever notes change
+  useEffect(() => {
+    localStorage.setItem("keeper-notes", JSON.stringify(notes));
+  }, [notes]);
+
+  // Add a new note
   function addNote(newNote) {
+    const noteWithId = {
+      id: Date.now(),
+      ...newNote,
+    };
+
     setNotes((prevNotes) => {
-      // using spread operator
-      return [...prevNotes, newNote];
+      return [...prevNotes, noteWithId];
     });
   }
 
+  // Delete a note
   function deleteNote(id) {
     setNotes((prevNotes) => {
-      return prevNotes.filter((noteItem, index) => {
-        return index !== id;
-      });
+      return prevNotes.filter((noteItem) => noteItem.id !== id);
     });
   }
+
+  // Search notes by title
+  const filteredNotes = notes.filter((note) =>
+    note.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div>
-      <Header />
-      {/* <Note /> */}
-      {/* {notes.map((noteItem) => (
-        <Note
-          key={noteItem.key}
-          title={noteItem.title}
-          content={noteItem.content}
-        />
-      ))} */}
-      {/* applied arrow function and maps */}
+      <Header
+        searchTerm={searchTerm}
+        onSearchChange={setSearchTerm}
+      />
 
       <CreateArea onAdd={addNote} />
-      {notes.map((noteItem, index) => {
-        return (
-          <Note
-            key={index}
-            id={index}
-            title={noteItem.title}
-            content={noteItem.content}
-            onDelete={deleteNote}
-          />
-        );
-      })}
+
+      <div className="notes-container">
+        {filteredNotes.map((noteItem) => {
+          return (
+            <Note
+              key={noteItem.id}
+              id={noteItem.id}
+              title={noteItem.title}
+              content={noteItem.content}
+              onDelete={deleteNote}
+            />
+          );
+        })}
+      </div>
 
       <Footer />
     </div>
@@ -58,5 +73,3 @@ function App() {
 }
 
 export default App;
-// NOTE:
-// The classes should be applied to html elements like div/h1/p... than react elements like <Header/>....
