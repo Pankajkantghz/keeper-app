@@ -80,6 +80,4 @@ Notes are currently stored in React state, so they are reset when the page is re
 
 ## 👨‍💻 Author
 
-**Pankaj Yadav**
-
-[GitHub](your-github-url) · [LinkedIn](your-linkedin-url)
+**Darth**
